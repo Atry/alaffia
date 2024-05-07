@@ -1,0 +1,12 @@
+{
+  "placeholders": {
+    ":DATABASE_URL": {
+      "envVar": "DATABASE_URL",
+      "required": true
+    },
+    ":SHADOW_DATABASE_URL": {
+      "envVar": "SHADOW_DATABASE_URL",
+      "required": true
+    }
+  }
+}
