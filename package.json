@@ -1,0 +1,27 @@
+{
+  "name": "alaffia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurbayerlein/alaffia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arthurbayerlein/alaffia/issues"
+  },
+  "homepage": "https://github.com/arthurbayerlein/alaffia#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "postgraphile": "^4.13.0"
+  },
+  "devDependencies": {
+    "graphile-migrate": "^1.4.1"
+  }
+}
