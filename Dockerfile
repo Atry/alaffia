@@ -8,10 +8,13 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install production dependencies.
-RUN npm install --only=production
+RUN npm install
 
 # Bundle app source inside Docker image
 COPY . .
 
-# The command to run our app when the container is invoked.
-CMD [ "node", "src/index.js" ]
+# Compile TypeScript using npx to use the local TypeScript version
+RUN npx tsc
+
+# Command to run the application using ts-node via nodemon
+CMD ["npm", "run", "dev"]
