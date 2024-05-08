@@ -16,5 +16,5 @@ COPY . .
 # Compile TypeScript using npx to use the local TypeScript version
 RUN npx tsc
 
-# Command to run the application using ts-node via nodemon
-CMD ["npm", "run", "dev"]
+# Start the application using ts-node via nodemon via run script
+CMD ["npm run dev"]
