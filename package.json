@@ -7,7 +7,7 @@
     "start": "node dist/index.js",
     "build": "tsc",
     "dev": "nodemon --exec ts-node src/index.ts",
-    "migrate": "graphile-migrate watch"
+    "migrate": "source .env.local && graphile-migrate watch"
   },
   "repository": {
     "type": "git",
