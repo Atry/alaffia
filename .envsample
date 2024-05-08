@@ -1,2 +1,0 @@
-DATABASE_URL=postgres://postgres:password@db:5432/alaffia_db
-SHADOW_DATABASE_URL=postgres://postgres:password@db_shadow:5432/alaffia_db_shadow
