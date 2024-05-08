@@ -3,6 +3,8 @@
 Implements a solution for the challenge outlined here: https://antique-peach-0f3.notion.site/Senior-Engineer-Technical-Challenge-fd2d457f9dbf4b51a301cced093f71d9
 
 ## System Dependencies
+
+- Node v20.11.0 (npm v10.2.4)
 - docker-compose
 
 ## Install Steps
@@ -27,11 +29,13 @@ Access API webapp interface for basic local testing: http://localhost:5000/graph
     - complex queries (I.e: usersByLocation) triggered by use of function for velocity and consistency
 - DX utilities
   - `nodemon` with `node-ts` for auto-transpilation within containers
-  - `graphile-migrate watch` for syncing DB schema changes 
+  - `graphile-migrate watch` for syncing DB schema changes
+  - `prettier`, because why not?
+    - Naturally with more time I would use ESLint with agreed upon configs
 
 ## Queries that fulfill API requirements
 
-PostGraphile is utilized in this project to automatically generate  the GraphQL API directly from the PostgreSQL database schema. This will make it inherently extensible. Since the API is defined programatically from the schema, the query syntax is defined by the resulting GraphQL schema. The following queries are the queries to fulfill the project requirements from the GraphQL schema produced by PostGraphile. 
+PostGraphile is utilized in this project to automatically generate the GraphQL API directly from the PostgreSQL database schema. This will make it inherently extensible. Since the API is defined programatically from the schema, the query syntax is defined by the resulting GraphQL schema. The following queries are the queries to fulfill the project requirements from the GraphQL schema produced by PostGraphile.
 
 ### user
 
@@ -66,6 +70,7 @@ query user($id: UUID!) {
 ```
 
 Sample query-variables:
+
 ```json
 {
   "id": "d6fbc5cf-8c87-442c-9bb9-cfaf4926fe01"
@@ -78,7 +83,11 @@ Note: In the assignment description, the users were spearate from locations. But
 
 ```graphql
 query usersByLocation($state: String, $zip: String, $address: String) {
-  filterLocations(stateFilter: $state, zipFilter: $zip, addressFilter: $address) {
+  filterLocations(
+    stateFilter: $state
+    zipFilter: $zip
+    addressFilter: $address
+  ) {
     edges {
       node {
         id
@@ -108,6 +117,7 @@ query usersByLocation($state: String, $zip: String, $address: String) {
 ```
 
 Sample query-variables:
+
 ```json
 {
   "state": "CA",
@@ -119,9 +129,9 @@ Sample query-variables:
 
 `npm run test`
 
-For simplicity in this exercise, and since the stack makes the GraphQL schema heavily embedded to the PostgreSQL schema. I chose to use Jest to write a minimalistic integration test that runs directly against the database. Which has seeds in the migrations themselves. 
+For simplicity in this exercise, and since the stack makes the GraphQL schema heavily embedded to the PostgreSQL schema. I chose to use Jest to write a minimalistic integration test that runs directly against the database. Which has seeds in the migrations themselves.
 
-For local DX for a bigger team, I would typically choose to keep the setup and teardown of integration tests in an isolated container with such that mutations don't remove the idempotency of the tests (they can be re-run without problems). I would also not add seeding to the `graphile-migrate` migration. 
+For local DX for a bigger team, I would typically choose to keep the setup and teardown of integration tests in an isolated container with such that mutations don't remove the idempotency of the tests (they can be re-run without problems). I would also not add seeding to the `graphile-migrate` migration.
 
 Due to the above, I also decided to skippe doing unit tests since the only application-level (service-layer) logic in the app is exposing Postgraphille. All business logic is embedded in the middleware Postgraphille example in this exercise.
 

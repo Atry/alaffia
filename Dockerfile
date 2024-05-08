@@ -1,5 +1,5 @@
-# Use the official Node.js 14 image as the base image
-FROM node:14
+# Use the official Node.js 20 image as the base image
+FROM node:20
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Compile TypeScript using npx to use the local TypeScript version
-RUN npx tsc
+RUN npx tsc -p tsconfig.build.json
 
 # Start the application using ts-node via nodemon via run script
 CMD ["npm run dev"]
