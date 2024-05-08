@@ -114,3 +114,15 @@ Sample query-variables:
   "zip": "90005"
 }
 ```
+
+## Integration tests
+
+`npm run test`
+
+For simplicity in this exercise, and since the stack makes the GraphQL schema heavily embedded to the PostgreSQL schema. I chose to use Jest to write a minimalistic integration test that runs directly against the database. Which has seeds in the migrations themselves. 
+
+For local DX for a bigger team, I would typically choose to keep the setup and teardown of integration tests in an isolated container with such that mutations don't remove the idempotency of the tests (they can be re-run without problems). I would also not add seeding to the `graphile-migrate` migration. 
+
+Due to the above, I also decided to skippe doing unit tests since the only application-level (service-layer) logic in the app is exposing Postgraphille. All business logic is embedded in the middleware Postgraphille example in this exercise.
+
+If I needed to have more elaborate expanded queries that required individual Resolvers (with PostGraphille plugins or wrapped by Apollo), I would have added unit tests per resolver, for instance.
